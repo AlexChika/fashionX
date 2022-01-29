@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Imperial+Script&family=Roboto:ital,wght@0,100;0,300;0,400;1,300;1,700;1,900&display=swap");
+:root {
+  --nav-color: white;
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+/* Utility classes */
+.f-align {
+  display: flex;
+  align-items: center;
+}
+.f-justify {
+  display: flex;
+  justify-content: center;
+}
+.f-wh {
+  width: 100%;
+  height: 100%;
+}
+.f-w {
+  width: 100%;
+}
+/* Nav bar */
+nav {
+  height: 60px;
+  box-shadow: 18px 0px 2px rgb(167, 121, 88);
+  position: relative;
+  transition: all 0.3s linear;
+}
+.static {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: url(./banner-6617550.png);
+  background-position: center;
+  background-size: cover;
+}
+.nav-con {
+  justify-content: space-around;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.nav-logo {
+  display: flex;
+}
+.logo-h {
+  font-family: "Imperial Script", cursive;
+  font-size: 1.2em;
+  color: pink;
+  text-shadow: 1px 1px 1px chocolate;
+}
+.logo-f {
+  width: 6em;
+  justify-content: center;
+  font-size: 0.7em;
+  color: white;
+  background-color: pink;
+  border-radius: 15px;
+}
+.nav-con .navcart-con {
+  position: relative;
+}
+.nav-con .nav-menu {
+  font-size: 30px;
+  color: var(--nav-color);
+}
+.navcart-con i {
+  font-size: 30px;
+  color: var(--nav-color);
+}
+.navcart-con .cart-no {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  height: max-content;
+  width: 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  background-color: pink;
+}
+.float {
+  position: fixed;
+  right: 5%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  background-color: pink;
+  background: radial-gradient(circle at top, white, 25%, pink, 75%, red);
+  border-radius: 50%;
+  justify-content: center;
+  color: white;
+}
+/* .float i {
+  color: black;
+} */
+.float div {
+  position: absolute;
+  display: block;
+  box-shadow: 1px 1px 5px grey;
+  top: 110%;
+  background: white;
+  padding: 10px;
+  height: 8em;
+  overflow-y: scroll;
+}
+.float div button {
+  padding: 10px 0px;
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+}
+/* end of Nav */
+/* side Bar */
+.sideBar-con,
+.cart-con {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100vw;
+  transform: translateX(100%);
+  transition: transform 0.3s linear;
+  visibility: hidden;
+}
+.sideBar-con {
+  left: 0;
+  background-color: chocolate;
+}
+/* Cart */
+.cart-con {
+  right: 0;
+  background-color: chocolate;
+}
+.close {
+  transform: translateX(0%);
+}
+/* media queries */
+@media screen and (min-width: 576px) {
+  .sideBar-con,
+  .cart-con {
+    width: 60vw;
+  }
+  .logo-h {
+    font-size: 1.3em;
+  }
+  .logo-f {
+    font-size: 0.8em;
+  }
+}
+@media screen and (min-width: 768px) {
+  .sideBar-con,
+  .cart-con {
+    width: 50vw;
+  }
+  .logo-h {
+    font-size: 1.4em;
+  }
+  .logo-f {
+    font-size: 0.9em;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .sideBar-con,
+  .cart-con {
+    width: 30vw;
+  }
+}
