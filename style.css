@@ -1,8 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Imperial+Script&family=Roboto:ital,wght@0,100;0,300;0,400;1,300;1,700;1,900&display=swap");
 :root {
   --nav-color: red;
+  --main-bg: white;
+  --pri-margin: 0.5em;
+  --sec-margin: 1em;
 }
-
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(226, 222, 222);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(253, 27, 102);
+}
 *,
 *::after,
 *::before {
@@ -14,32 +31,19 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background-color: rgb(247, 243, 243);
 }
 
 a {
   -webkit-tap-highlight-color: transparent;
   display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
-::-webkit-scrollbar {
-  width: 6px;
-  padding: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #e5e9f2;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(80, 80, 114);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(15, 50, 59);
-}
-section {
-  flex-basis: 100%;
-  max-width: 100%;
-  min-width: 100%;
-  width: 100%;
+button {
+  border: none;
+  outline: none;
+  background: none;
 }
 
 /* Utility classes */
@@ -61,8 +65,9 @@ section {
 /* Nav bar */
 nav {
   height: 60px;
-  box-shadow: 18px 0px 2px rgb(167, 121, 88);
-  transition: all 0.3s linear;
+  border-bottom: 1px solid rgb(196, 151, 120);
+  transition: background 0.3s linear;
+  background-color: var(--main-bg);
 }
 .static {
   position: sticky;
@@ -71,6 +76,7 @@ nav {
   background: url(./images/banner1-pb.png);
   background-position: center;
   background-size: cover;
+  z-index: 10;
 }
 .nav-con {
   justify-content: space-around;
@@ -93,6 +99,7 @@ nav {
   color: white;
   background-color: pink;
   border-radius: 15px;
+  font-style: italic;
 }
 .nav-con .navcart-con {
   position: relative;
@@ -117,24 +124,23 @@ nav {
   background-color: pink;
 }
 /* end of Nav */
-
 /* banner */
 .banner {
-  margin-top: 1em;
-  /* scroll-behavior: smooth;
+  padding: 10px;
+  margin-top: var(--pri-margin);
   scroll-snap-type: x mandatory;
   scroll-snap-type: mandatory;
-  -webkit-scroll-snap-type: mandatory; */
-  display: flex;
-  flex-wrap: nowrap;
+  -webkit-scroll-snap-type: mandatory;
+  white-space: nowrap;
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  background-color: var(--main-bg);
 }
 .banner a {
   scroll-snap-stop: always;
   scroll-snap-align: center;
   padding-left: 8px;
-  flex-shrink: 0;
 }
 .banner img {
   width: 80vw;
@@ -142,38 +148,191 @@ nav {
   /* margin: 1em; */
 }
 /* end of banner */
+/* sections icons */
+.sec-ic {
+  margin-top: var(--pri-margin);
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: var(--main-bg);
+}
+.sec-ic a {
+  flex-direction: column;
+  justify-content: space-around;
+  height: 8em;
+  width: 30%;
+  text-align: center;
+  color: black;
+  margin-top: var(--sec-margin);
+}
+.sec-ic a div {
+  background-color: rgb(247, 243, 243);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.sec-ic a div img {
+  border-radius: 50%;
+  object-fit: center;
+}
+/* end of sections icons */
+/* Hero */
+.hero {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  min-height: 25vh;
+  margin-top: var(--pri-margin);
+  background: linear-gradient(153deg, pink 20%, white 50%, pink);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  padding: 10px;
+  text-shadow: 1px 1px 1px black;
+  line-height: 1.6em;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 200%;
+  background: linear-gradient(
+    to left,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  left: -15%;
+  transform: rotate(45deg);
+  animation: hero 4s forwards infinite;
+}
+@keyframes hero {
+  30%,
+  100% {
+    left: 110%;
+  }
+}
+.hero h1 a {
+  font-family: "Imperial Script", cursive;
+  color: pink;
+  text-shadow: 1px 1px 1px black;
+}
+.hero h2 {
+  font-style: italic;
+  margin-top: var(--pri-margin);
+}
+.hero p {
+  font-weight: 600;
+  font-size: 18px;
+}
+.hero .hero-text {
+  opacity: 0;
+  animation: heroText 3s linear infinite;
+}
+@keyframes heroText {
+  100% {
+    opacity: 1;
+  }
+}
+.hero p button {
+  font-weight: 600;
+  padding: 5px;
+  width: 6em;
+  background: tomato;
+  color: inherit;
+  border-radius: 15px;
+  transition: all 0.3s linear;
+  transform: scale(0.9);
+  animation: heroBtn 1s linear infinite;
+}
+.hero p button:hover,
+.hero p button:focus {
+  opacity: 0.7;
+}
+@keyframes heroBtn {
+  50% {
+    transform: scale(1);
+  }
+}
+/* end of Hero */
 /* float btn */
 .float {
   position: fixed;
-  right: 5%;
+  right: 7%;
   top: 50%;
   height: 40px;
   width: 40px;
   background-color: pink;
   background: radial-gradient(circle at top, white, 25%, pink, 75%, red);
   border-radius: 50%;
-  justify-content: center;
   color: white;
+  cursor: pointer;
+  justify-content: center;
 }
-.float div {
+#float-btn {
+  justify-content: center;
+  border-radius: 50%;
+}
+.float article {
   position: absolute;
-  display: block;
-  box-shadow: 1px 1px 5px grey;
+  flex-direction: column;
   top: 110%;
-  background: white;
-  padding: 10px;
-  height: 8em;
-  overflow-y: scroll;
+  background-color: var(--main-bg);
+  height: 0;
+  overflow-y: hidden;
+  border-radius: 10px;
+  visibility: hidden;
+  transition: all 0.3s linear;
+  color: grey;
+  padding: 5px;
 }
-.float div button {
-  padding: 10px 0px;
+.float.show article {
+  visibility: visible;
+  height: 8.2em;
+  overflow-y: auto;
+}
+.float article .flt-bdy .options {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: all 0.3s linear;
+  font-size: 15px;
+  text-align: center;
+}
+.float article .flt-bdy.show .options {
+  height: 4em;
+  visibility: visible;
+}
+.float article .flt-bdy .fl-hdr {
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid rgb(247, 243, 243);
+  transition: all 0.3s linear;
+  font-style: italic;
+}
+.float article .flt-bdy .fl-hdr:hover,
+.float article .flt-bdy .fl-hdr:focus {
+  border-bottom: 1px solid pink;
+  color: pink;
+}
+.float article .flt-bdy .fl-hdr:hover i,
+.float article .flt-bdy .fl-hdr:focus i {
+  color: pink;
+}
+.float article .flt-bdy .fl-hdr i:last-of-type {
+  display: none;
+}
+.float article .flt-bdy.show .fl-hdr i:last-of-type {
   display: block;
-  border: none;
-  outline: none;
-  background: none;
+}
+.float article .flt-bdy .fl-hdr i:first-of-type {
+  display: block;
+}
+.float article .flt-bdy.show .fl-hdr i:first-of-type {
+  display: none;
 }
 /* end of float btn */
-/* end of banner */
+
 /* side Bar */
 .sideBar-con,
 .cart-con {
@@ -244,3 +403,9 @@ nav {
     brown 90%,
     chocolate 90%
   ); */
+/* section {
+  flex-basis: 100%;
+  max-width: 100%;
+  min-width: 100%; */
+/* width: 100%;
+} */
