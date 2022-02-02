@@ -204,7 +204,7 @@ nav {
   );
   left: -15%;
   transform: rotate(45deg);
-  animation: hero 4s forwards infinite;
+  animation: hero 4s ease-out infinite;
 }
 @keyframes hero {
   30%,
@@ -255,6 +255,108 @@ nav {
   }
 }
 /* end of Hero */
+/* sections */
+.hdng {
+  text-align: center;
+  background-color: var(--main-bg);
+  background-color: chocolate;
+  font-style: italic;
+  padding: 20px 0;
+  margin-top: var(--pri-margin);
+  background-position: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  background-repeat: no-repeat;
+}
+.sec-bdy {
+  padding: 0 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5em;
+  place-items: center;
+  margin-top: var(--pri-margin);
+}
+.sec-bdy .itm {
+  flex-direction: column;
+  background: var(--main-bg);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.sec-bdy .itm .itm-desc {
+  padding: 10px;
+  align-self: start;
+}
+.sec-bdy .itm:hover,
+.sec-bdy .itm:focus {
+  box-shadow: 2px 2px 5px rgb(172, 169, 169), -2px -2px 5px rgb(172, 169, 169);
+}
+/* tray */
+.sec-bdy .itm .tray {
+  position: absolute;
+  align-self: end;
+  top: 50%;
+  background: chocolate;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 7px;
+  color: white;
+  cursor: pointer;
+  transform: translateX(100%);
+  transition: transform 0.3s linear;
+}
+.sec-bdy .itm:hover .tray,
+.sec-bdy .itm:focus .tray {
+  transform: translateX(0);
+}
+.sec-bdy .itm .tray.added {
+  background: rgb(188, 238, 113);
+}
+.sec-bdy .itm .tray i {
+  font-size: 20px;
+}
+.sec-bdy .itm .tray i:first-of-type {
+  display: none;
+}
+.sec-bdy .itm .tray i:last-of-type {
+  display: inline;
+}
+.sec-bdy .itm .tray.added i:first-of-type {
+  display: inline;
+}
+.sec-bdy .itm .tray.added i:last-of-type {
+  display: none;
+}
+.itm-img {
+  width: 150px;
+  /* height: 150px; */
+  margin: 0 auto;
+}
+/* Phone section */
+.phn-sec .hdng {
+  background-image: url(./images/phone-banner.jpg);
+}
+/* laptop section */
+.lap-sec .hdng {
+  background-image: url(./images/laptop-banner.jpg);
+}
+/* male section */
+.male-sec .hdng {
+  background-image: url(./images/male-banner.jpg);
+  background-position: top;
+}
+.lds-sec .hdng {
+  background-image: url(./images/female-banner.png);
+}
+.shoe-sec .hdng {
+  background-image: url(./images/shoe-banner.jpg);
+  background-position: top;
+}
+.snks-sec .hdng {
+  background-image: url(./images/sneaker-banner.jpg);
+}
+/* end of laptop section */
+/* end of Phone section */
 /* float btn */
 .float {
   position: fixed;
@@ -370,6 +472,15 @@ nav {
     font-size: 0.8em;
   }
 }
+@media screen and (min-width: 600px) {
+  .sec-bdy {
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  }
+  .itm-img {
+    width: 170px;
+    /* height: 170px; */
+  }
+}
 @media screen and (min-width: 768px) {
   .sideBar-con,
   .cart-con {
@@ -381,11 +492,24 @@ nav {
   .logo-f {
     font-size: 0.9em;
   }
+  .sec-bdy {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.8em;
+    padding: 10px;
+  }
+  .itm-img {
+    width: 220px;
+    /* height: 220px; */
+  }
 }
 @media screen and (min-width: 1000px) {
   .sideBar-con,
   .cart-con {
     width: 30vw;
+  }
+  .sec-bdy {
+    gap: 1.1em;
+    padding: 30px;
   }
 }
 /* background: linear-gradient(
