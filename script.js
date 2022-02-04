@@ -6,7 +6,7 @@ const floatBdy = document.querySelectorAll(".flt-bdy");
 const floatHdr = document.querySelectorAll(".fl-hdr");
 const hm_crsEl = Array.from(document.querySelectorAll("#hm-crs a"));
 const heroTxt = select(".hero-text");
-
+let windowwith = window.innerWidth;
 let crsEl = 0;
 // ...............    utils   .........
 function select(x) {
@@ -17,7 +17,7 @@ function select(x) {
     throw new Error(`${x} not found`);
   }
 }
-// Nav and cart and side bar
+// Nav and cart buttons
 window.addEventListener("scroll", (x) => {
   const navHeight = nav.getBoundingClientRect().height;
   if (window.scrollY >= navHeight) {
@@ -25,10 +25,27 @@ window.addEventListener("scroll", (x) => {
     root.style.setProperty("--nav-color", "white");
   } else {
     nav.classList.remove("static");
-    root.style.setProperty("--nav-color", "red");
+    root.style.setProperty("--nav-color", "rgb(253, 175, 120)");
   }
 });
+const cartBtns = [
+  select("#cart-btn"),
+  select("#crt-close"),
+  select("#flt-crtBtn"),
+];
+cartBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    select("#cart-con").classList.toggle("close");
+  });
+});
+select(".nav-menu").addEventListener("click", (e) => {
+  float.style.left = e.currentTarget.offsetLeft + "px";
+  float.style.top = e.currentTarget.offsetTop + "px";
+});
 // Home Carousel
+hm_crsEl.forEach((a, index) => {
+  a.style.left = `${index * 100}%`;
+});
 function scroll() {
   if (window.scrollY <= nav.getBoundingClientRect().height) {
     hm_crsEl[crsEl].scrollIntoView({
@@ -100,5 +117,7 @@ floatHdr.forEach((el) => {
   const a = styles.getPropertyValue("left");
   const b = styles.getPropertyValue("top");
   // const rect = card.getBoundingClientRect();
+    console.log("stop hitting me");
+
 
 */

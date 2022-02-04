@@ -24,7 +24,7 @@
             <span class="logo-h">House</span>
           </h2>
         </div>
-        <div class="navcart-con">
+        <div id="cart-btn" class="navcart-con">
           <i class="bi bi-cart4"></i>
           <span id="cart-no" class="cart-no">0</span>
         </div>
@@ -32,29 +32,67 @@
     </nav>
     <!-- end of Nav -->
     <!-- banner -->
-    <section id="hm-crs" class="banner">
-      <a id="" href="">
-        <img src="./images/card1.gif" alt="" />
-      </a>
-      <a id="" href="">
-        <img src="./images/card-shoe.jpg" alt="" />
-      </a>
-      <a id="" href="">
-        <img src="./images/card-assorted.jpg" alt="" />
-      </a>
-      <a href="">
-        <img src="./images/cards1-fp.jpg" alt="" />
-      </a>
-      <a href="">
-        <img src="./images/card-assorted1.png" alt="" />
-      </a>
-      <a href="">
-        <img
-          src="./images/slim-lady-fashionable-trousers-blouse-red-hat-is-sitting-chair-stand-with-shiny-dresses.jpg"
-        />
-      </a>
-    </section>
-    <!-- end of banner -->
+    <div class="bg-scrn-banner">
+      <section class="banner-rndm">
+        <article class="">
+          <div class="img f-wh">
+            <img class="f-wh" src="./images/sneaker-banner.jpg" alt="" />
+          </div>
+          <div class="banner-txt">
+            <h2>Deal Of The Day</h2>
+            <p>Black female shoe</p>
+            <p>date</p>
+            <p>count Down</p>
+            <p class="ban-price">
+              <i class="bi bi-currency-dollar"></i
+              ><span id="ban-price">00</span>
+            </p>
+          </div>
+        </article>
+      </section>
+      <!-- banner small screen -->
+      <section id="hm-crs" class="banner">
+        <a id="" href="">
+          <img class="img" src="./images/card1.gif" alt="" />
+        </a>
+        <a id="" href="">
+          <img class="img" src="./images/card-shoe.jpg" alt="" />
+        </a>
+        <a id="" href="">
+          <img class="img" src="./images/card-assorted.jpg" alt="" />
+        </a>
+        <a href="">
+          <img class="img" src="./images/cards1-fp.jpg" alt="" />
+        </a>
+        <a href="">
+          <img class="img" src="./images/card-assorted1.png" alt="" />
+        </a>
+        <a href="">
+          <img
+            class="img"
+            src="./images/slim-lady-fashionable-trousers-blouse-red-hat-is-sitting-chair-stand-with-shiny-dresses.jpg"
+          />
+        </a>
+      </section>
+      <!-- end of banner small screen -->
+      <section class="banner-rndm">
+        <article class="">
+          <div class="img f-wh">
+            <img class="f-wh" src="./images/1.jpg" alt="" />
+          </div>
+          <div class="banner-txt">
+            <h2>Deal Of The Day</h2>
+            <span>date</span>
+            <span>count Down</span>
+            <p>Black female shoe</p>
+            <p>
+              <i class="bi bi-currency-dollar"></i
+              ><span id="ban-price">00</span>
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
     <!-- section Icon -->
     <article class="sec-ic f-align">
       <a class="f-align" href="#phn-sec">
@@ -109,9 +147,6 @@
     <section class="phn-sec section">
       <div class="hdng">
         <h2>Smart Phones</h2>
-        <div class="hdng-img">
-          <!-- <img src="./images/phone-sec.png" alt="" /> -->
-        </div>
       </div>
       <div class="sec-bdy">
         <article class="itm f-align">
@@ -380,7 +415,7 @@
           </div>
           <div class="itm-desc">
             <p class="itm-name">helllo ahaha....</p>
-            <p class="itm-prc">#45,00</p>
+            <p class="itm-prc"><i class="bi bi-currency-dollar"></i>45,00</p>
           </div>
           <div class="tray added">
             <span class="">add to cart</span>
@@ -524,10 +559,10 @@
       </span>
       <article class="">
         <div class="flt-bdy">
-          <a href="#" class="fl-hdr f-align">
+          <div id="flt-crtBtn" class="fl-hdr f-align">
             <p>Cart</p>
             <i style="display: block" class="bi bi-cart4"></i>
-          </a>
+          </div>
         </div>
         <div class="flt-bdy">
           <div class="fl-hdr f-align">
@@ -568,13 +603,133 @@
       </article>
     </span>
     <!-- end of float Icon -->
-    <section class="cart-con br">hello from cart container</section>
-    <section class="sideBar-con">hello from cart side bar</section>
+    <!-- cart container -->
+    <section id="cart-con" class="cart-con">
+      <div class="crt-hdng">
+        <button id="crt-close" class="cart-close">
+          <i class="bi bi-x-circle"></i>
+        </button>
+        <h1 id="crt-status">3 Items in Cart</h1>
+      </div>
+      <div class="crt-bdy">
+        <!-- Javascript injects here -->
+        <article>
+          <div class="crt-item-con">
+            <div class="crt-img">
+              <img class="f-wh" src="./images/mens-shoes_260x144.png" alt="" />
+            </div>
+            <div class="crt-dtls">
+              <p class="crt-item-desc">sasumsung gakaxy s21 ultra</p>
+              <p>
+                Sub-Total:<i class="bi bi-currency-dollar"></i
+                ><span id="sub-total">00</span>
+              </p>
+            </div>
+          </div>
+          <div class="crt-math">
+            <span id="crt-rm"> Remove<i class="bi bi-trash"></i> </span>
+            <div>
+              <span id="crt-add">
+                <i class="bi bi-plus-circle"></i>
+              </span>
+              <span id="crt-amt" class="cr">0</span>
+              <span id="crt-min">
+                <i class="bi bi-dash-circle"></i>
+              </span>
+            </div>
+          </div>
+        </article>
+        <article>
+          <div class="crt-item-con">
+            <div class="crt-img">
+              <img class="f-wh" src="./images/mens-shoes_260x144.png" alt="" />
+            </div>
+            <div class="crt-dtls">
+              <p class="crt-item-desc">sasumsung gakaxy s21 ultra</p>
+              <p>
+                Sub-Total:<i class="bi bi-currency-dollar"></i
+                ><span id="sub-total">00</span>
+              </p>
+            </div>
+          </div>
+          <div class="crt-math">
+            <span id="crt-rm"> Remove<i class="bi bi-trash"></i> </span>
+            <div>
+              <span id="crt-add">
+                <i class="bi bi-plus-circle"></i>
+              </span>
+              <span id="crt-amt" class="cr">0</span>
+              <span id="crt-min">
+                <i class="bi bi-dash-circle"></i>
+              </span>
+            </div>
+          </div>
+        </article>
+        <article>
+          <div class="crt-item-con">
+            <div class="crt-img">
+              <img class="f-wh" src="./images/mens-shoes_260x144.png" alt="" />
+            </div>
+            <div class="crt-dtls">
+              <p class="crt-item-desc">sasumsung gakaxy s21 ultra</p>
+              <p>
+                Sub-Total:<i class="bi bi-currency-dollar"></i
+                ><span id="sub-total">00</span>
+              </p>
+            </div>
+          </div>
+          <div class="crt-math">
+            <span id="crt-rm"> Remove<i class="bi bi-trash"></i> </span>
+            <div>
+              <span id="crt-add">
+                <i class="bi bi-plus-circle"></i>
+              </span>
+              <span id="crt-amt" class="cr">0</span>
+              <span id="crt-min">
+                <i class="bi bi-dash-circle"></i>
+              </span>
+            </div>
+          </div>
+        </article>
+        <article>
+          <div class="crt-item-con">
+            <div class="crt-img">
+              <img class="f-wh" src="./images/mens-shoes_260x144.png" alt="" />
+            </div>
+            <div class="crt-dtls">
+              <p class="crt-item-desc">sasumsung gakaxy s21 ultra</p>
+              <p>
+                Sub-Total:<i class="bi bi-currency-dollar"></i
+                ><span id="sub-total">00</span>
+              </p>
+            </div>
+          </div>
+          <div class="crt-math">
+            <span id="crt-rm"> Remove<i class="bi bi-trash"></i> </span>
+            <div>
+              <span id="crt-add">
+                <i class="bi bi-plus-circle"></i>
+              </span>
+              <span id="crt-amt" class="cr">0</span>
+              <span id="crt-min">
+                <i class="bi bi-dash-circle"></i>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="crt-total-con">
+        <div>
+          <span
+            >Your Total:<i class="bi bi-currency-dollar"></i
+            ><span id="crt-total">1200</span></span
+          >
+        </div>
+        <button id="clr-crt" class="f-align clr-crt">Clear Cart</button>
+      </div>
+    </section>
+    <!-- <section class="modal">modal</section> -->
     <script type="module" src="script.js"></script>
   </body>
 </html>
-<!--           <i class="bi bi-x-circle"></i>
- close circle -->
-<!-- <i class="bi bi-currency-dollar"></i> dollar -->
-<!-- <i class="bi bi-x-lg"></i> x close -->
 <!-- tel:08160605231 note 8i-->
