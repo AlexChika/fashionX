@@ -5,7 +5,7 @@
   --main-bg: white;
   --pri-margin: 0.5em;
   --sec-margin: 1em;
-  --sec-bg: rgb(226, 222, 222);
+  --sec-bg: rgb(243, 243, 243);
 }
 ::-webkit-scrollbar {
   width: 3px;
@@ -35,7 +35,9 @@ html {
   -webkit-text-size-adjust: 100%;
   background-color: var(--sec-bg);
 }
-
+body {
+  overflow-x: hidden;
+}
 a {
   -webkit-tap-highlight-color: transparent;
   display: inline-block;
@@ -193,7 +195,7 @@ nav {
   position: relative;
   overflow: hidden;
   color: white;
-  padding: 10px;
+  padding: 10px 0;
   text-shadow: 1px 1px 1px black;
   line-height: 1.6em;
 }
@@ -232,14 +234,9 @@ nav {
   font-size: 18px;
 }
 .hero .hero-text {
-  opacity: 0;
-  animation: heroText 3s linear infinite;
+  font-size: 20px;
 }
-@keyframes heroText {
-  100% {
-    opacity: 1;
-  }
-}
+
 .hero p button {
   font-weight: 600;
   padding: 5px;
@@ -267,7 +264,7 @@ nav {
   background-color: var(--main-bg);
   background-color: var(--chocolate);
   font-style: italic;
-  padding: 20px 0;
+  padding: 15px 0;
   margin-top: var(--pri-margin);
   background-position: center;
   color: white;
@@ -278,9 +275,10 @@ nav {
   padding: 0 5px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.5em;
+  /* gap: 0.5em; */
   place-items: center;
-  margin-top: var(--pri-margin);
+  /* margin-top: var(--pri-margin); */
+  background: var(--main-bg);
 }
 .sec-bdy .itm {
   flex-direction: column;
@@ -293,8 +291,12 @@ nav {
 .sec-bdy .itm .itm-desc {
   padding: 10px;
   align-self: start;
+  word-wrap: break-word;
+  /* word-break: break-all; */
+  /* text-align: center; */
   width: 100%;
   color: grey;
+  max-width: 200px;
 }
 .itm-desc p:last-of-type {
   font-style: italic;
@@ -356,27 +358,53 @@ nav {
   margin: 0 auto;
 }
 /* Phone section */
-.phn-sec .hdng {
+.hdng.phn {
+  background-image: url(./images/phone-banner.jpg);
+}
+/* Watch section */
+.hdng.watch {
   background-image: url(./images/phone-banner.jpg);
 }
 /* laptop section */
-.lap-sec .hdng {
+.hdng.lap {
   background-image: url(./images/laptop-banner.jpg);
 }
 /* male section */
-.male-sec .hdng {
+.hdng.male {
   background-image: url(./images/male-banner.jpg);
   background-position: top;
 }
-.lds-sec .hdng {
+/* suit section */
+.hdng.suit {
+  background-image: url(./images/male-banner.jpg);
+  background-position: top;
+}
+/* ladies section */
+.hdng.lds {
   background-image: url(./images/female-banner.png);
 }
-.shoe-sec .hdng {
+/* shoe section */
+.hdng.shoe {
   background-image: url(./images/shoe-banner.jpg);
   background-position: top;
 }
-.snks-sec .hdng {
+/* heel section */
+.hdng.heel {
+  background-image: url(./images/shoe-banner.jpg);
+  background-position: top;
+}
+/* sneakers section  */
+.hdng.snks {
   background-image: url(./images/sneaker-banner.jpg);
+}
+.hdng {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 300ms ease-in, transform 350ms ease-in;
+}
+.hdng.fadein {
+  opacity: 1;
+  transform: translateY(0);
 }
 /* end of sections */
 /* float btn */
@@ -422,6 +450,9 @@ nav {
   transition: all 0.3s linear;
   font-size: 15px;
   text-align: center;
+}
+.float article .flt-bdy .options a {
+  display: block;
 }
 .float article .flt-bdy.show .options {
   height: 4em;
@@ -563,6 +594,10 @@ nav {
   }
 }
 @media screen and (min-width: 768px) {
+  .hdng {
+    width: 60%;
+    margin: 0 auto;
+  }
   .cart-con {
     width: 50vw;
   }
@@ -574,16 +609,17 @@ nav {
   }
   .sec-bdy {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.8em;
-    padding: 10px;
   }
   .itm-img {
-    width: 220px;
-    /* height: 220px; */
+    width: 200px;
   }
 }
 /* banner specific media query */
 @media screen and (min-width: 769px) {
+  .sec-bdy {
+    width: 90%;
+    margin: 0 auto;
+  }
   /* banner */
   .bg-scrn-banner {
     margin-top: var(--pri-margin);
@@ -644,7 +680,7 @@ nav {
     z-index: 3;
   }
   .banner a {
-    padding: 0;
+    padding: 0 7px;
     position: absolute;
     left: 0;
     top: 0;
@@ -660,9 +696,5 @@ nav {
 @media screen and (min-width: 1000px) {
   .cart-con {
     width: 30vw;
-  }
-  .sec-bdy {
-    gap: 1.1em;
-    padding: 30px;
   }
 }
