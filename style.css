@@ -66,7 +66,7 @@ button {
 }
 /* Nav bar */
 nav {
-  height: 60px;
+  height: 100px;
   border-bottom: 1px solid rgb(196, 151, 120);
   transition: background 0.3s linear;
   background-color: var(--main-bg);
@@ -624,6 +624,13 @@ nav {
 }
 /* media queries */
 @media screen and (min-width: 576px) {
+  nav {
+    height: 70px;
+  }
+  .float {
+    width: 35px;
+    height: 35px;
+  }
   .cart-con {
     width: 60vw;
   }
@@ -670,6 +677,13 @@ nav {
 }
 /* banner specific media query */
 @media screen and (min-width: 769px) {
+  nav {
+    height: 60px;
+  }
+  .float {
+    width: 30px;
+    height: 30px;
+  }
   .sec-bdy {
     width: 90%;
     margin: 0 auto;
