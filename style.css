@@ -426,8 +426,8 @@ nav {
   position: fixed;
   right: 7%;
   top: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   background: radial-gradient(circle at top, white, 25%, pink, 75%, red);
   border-radius: 50%;
   color: white;
@@ -469,8 +469,12 @@ nav {
   display: block;
 }
 .float article .flt-bdy.show .options {
-  height: 4em;
+  height: 5.5em;
+  padding: 5px 0;
   visibility: visible;
+}
+.float article .flt-bdy.show .options * {
+  margin-bottom: 5px;
 }
 .float article .flt-bdy .fl-hdr {
   justify-content: space-between;
