@@ -15,18 +15,12 @@ const sectionBody = document.querySelectorAll(".sec-bdy");
 const cartBody = select(".crt-bdy");
 const itmState = document.querySelectorAll(".stats");
 const crtState = select("#crt-status");
-// const subTotal = select("#sub-total");
-// const remove = select("#crt-rm");
-// const add = select("#crt-add");
-// const itmNum = select("#crt-amt");
 const crtNum = select("#cart-no");
-// const min = select("#crt-min");
 const total = select("#crt-total");
 const clearCrt = select("#clr-crt");
 const hm_crsEl = Array.from(document.querySelectorAll("#hm-crs a"));
 const heroTxt = select(".hero-text");
 let crsEl = 0;
-
 // ...............    utils   .........
 // gets dom elements
 function select(x) {
@@ -90,7 +84,7 @@ class UpdateDom {
             </p>
           </div>
           <div data-id="${id}" data-stat="out" class="tray">
-            <span class="stats">add to cart</span>
+            <span class="stats">Add To Cart</span>
             <i class="bi bi-cart-check-fill"></i>
             <i class="bi bi-cart-plus"></i>
           </div>
@@ -113,8 +107,7 @@ class UpdateDom {
           const id = e.currentTarget.dataset.id;
           const price = getEl(btn.parentElement, ".itm-prc").textContent;
           const amt = 1;
-          const subtotal = "";
-          const item = { name, img, id, price, amt, desc, subtotal };
+          const item = { name, img, id, price, amt, desc };
           Storage.setCartItems(item);
           this.cartRender(Storage.getCart());
           this.cartValues();
@@ -129,7 +122,7 @@ class UpdateDom {
   cartRender(products) {
     const domproducts = products
       .map((data) => {
-        const { amt, id, img, name, price, desc, subtotal } = data;
+        const { amt, id, img, name, price, desc } = data;
         return `
       <article data-id="${id}">
           <div class="crt-item-con">
@@ -141,11 +134,7 @@ class UpdateDom {
               <p class="crt-item-desc">${desc}</p>
               <p>
                 Sub-Total:<i class="bi bi-currency-dollar"></i
-                ><span id="price">${price}</span>
-              </p>
-              <p>
-                Sub-Total:<i class="bi bi-currency-dollar"></i
-                ><span id="sub-total">${subtotal}</span>
+                ><span id="sub-total">${price}</span>
               </p>
             </div>
           </div>
@@ -168,58 +157,97 @@ class UpdateDom {
     cartBody.innerHTML = domproducts;
     const plusBtn = document.querySelectorAll("#crt-add");
     const minBtn = document.querySelectorAll("#crt-min");
+    const removeBtn = document.querySelectorAll("#crt-rm");
     plusBtn.forEach((btn) => {
       btn.addEventListener("click", () => {
-        console.log("I was increased");
-        const amt = getEl(
-          btn.parentElement.parentElement.parentElement,
-          "#crt-amt"
-        );
-        const priceEl = getEl(
-          btn.parentElement.parentElement.parentElement,
-          "#price"
-        );
-        const sub = getEl(
+        const id = btn.parentElement.parentElement.parentElement.dataset.id;
+        const item = Storage.getCart().find((el) => el.id === id);
+        const price = parseInt(item.price);
+        let amt = parseInt(item.amt);
+        amt++;
+        let newprice = amt * price;
+        const subtotal = getEl(
           btn.parentElement.parentElement.parentElement,
           "#sub-total"
         );
-        let newSubTotal = 0;
-        let amount = parseInt(amt.textContent);
-        let price = parseInt(priceEl.textContent);
-        newSubTotal += price;
-        amt.textContent = amount++;
-        sub.textContent = newSubTotal;
+        const amtEl = getEl(btn.parentElement, "#crt-amt");
+        subtotal.textContent = newprice;
+        amtEl.textContent = amt;
+        const updated = Storage.getCart().map((item) => {
+          if (item.id === id) {
+            item.amt = amt;
+          }
+          return item;
+        });
+        Storage.updateCart(updated);
         this.cartValues();
       });
     });
-    // minBtn.forEach((btn) => {
-    //   btn.addEventListener("click", () => {
-    //     console.log("I was decreased");
-    //     const ambtn = getEl(btn.parentElement, "#crt-amt");
-    //     // let sum =
-    //   });
-    // });
+    minBtn.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.parentElement.parentElement.parentElement.dataset.id;
+        const item = Storage.getCart().find((el) => el.id === id);
+        const price = parseInt(item.price);
+        let amt = parseInt(item.amt);
+        amt--;
+        if (amt < 1) this.remove(id);
+        let newprice = amt * price;
+        const subtotal = getEl(
+          btn.parentElement.parentElement.parentElement,
+          "#sub-total"
+        );
+        const amtEl = getEl(btn.parentElement, "#crt-amt");
+        subtotal.textContent = newprice;
+        amtEl.textContent = amt;
+        const updated = Storage.getCart().map((item) => {
+          if (item.id === id) {
+            item.amt = amt;
+          }
+          return item;
+        });
+        Storage.updateCart(updated);
+        this.cartValues();
+      });
+    });
+    removeBtn.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.parentElement.parentElement.dataset.id;
+        this.remove(id);
+      });
+    });
+    //
   }
   cartValues() {
     let cart = Storage.getCart();
-    let sum = 0;
-    let subTotal = 0;
+    let totalSum = 0;
+    let itmCount = 0;
     cart.forEach((item) => {
-      sum += parseInt(item.price);
+      totalSum += parseInt(item.price) * item.amt;
     });
     cart.forEach((item) => {
-      subTotal += parseInt(item.amt);
+      itmCount += parseInt(item.amt);
     });
-    crtState.textContent = `${subTotal} Items In Cart`;
-    crtNum.textContent = subTotal;
-    total.textContent = sum;
+    crtState.textContent = `${itmCount} Items In Cart`;
+    crtNum.textContent = itmCount;
+    total.textContent = totalSum;
   }
-  increment(btn) {
+  remove(id) {
+    const items = Storage.getCart().filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    Storage.updateCart(items);
+    this.cartRender(Storage.getCart());
     this.cartValues();
-  }
-  decrement(btn) {}
-  remove() {
-    console.log("I removed someone");
+    const bagBtns = document.querySelectorAll(".tray");
+    bagBtns.forEach((btn) => {
+      if (btn.dataset.id === id) {
+        btn.dataset.stat = "out";
+        btn.classList.remove("added");
+        btn.querySelector(".stats").textContent = "Add To Cart";
+      }
+    });
   }
 }
 class Storage {
@@ -234,14 +262,22 @@ class Storage {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
   static getCart() {
-    const array = JSON.parse(localStorage.getItem("cart"));
+    let array;
+    if (localStorage.getItem("cart")) {
+      array = JSON.parse(localStorage.getItem("cart"));
+    } else {
+      array = [];
+    }
     return array;
+  }
+  static updateCart(arr) {
+    localStorage.setItem("cart", JSON.stringify(arr));
   }
 }
 window.addEventListener("DOMContentLoaded", () => {
   const products = new Products();
   const updateDom = new UpdateDom();
-
+  const cartItems = Storage.getCart();
   products
     .getProducts()
     .then((products) => {
@@ -250,8 +286,26 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     })
     .then(() => {
-      console.log("third layer");
       updateDom.getBtns();
+    })
+    .then(() => {
+      clearCrt.addEventListener("click", () => {
+        localStorage.removeItem("cart");
+        updateDom.cartRender(Storage.getCart());
+        updateDom.cartValues();
+      });
+      updateDom.cartRender(cartItems);
+      updateDom.cartValues();
+      const bagBtns = document.querySelectorAll(".tray");
+      bagBtns.forEach((btn) => {
+        cartItems.forEach((item) => {
+          if (btn.dataset.id === item.id) {
+            btn.dataset.stat = "in";
+            btn.classList.add("added");
+            btn.querySelector(".stats").textContent = "In Cart";
+          }
+        });
+      });
     })
     .catch((error) => {
       // window.location.reload();
@@ -302,17 +356,23 @@ function scroll() {
 scroll();
 //   hero text
 const heroText = ["Fashion", "Gadgets", "Ladies-wear", "Mens-wear", "Sneakers"];
+const floatToolTip = [
+  "press and hold, then drag",
+  "drag to anywhere on the screen",
+  "click for esay navigation",
+];
 function setHeroText() {
   let i = 0;
+  let j = 0;
   return setInterval(() => {
     heroTxt.textContent = heroText[i];
+    floatBtn.dataset.tooltip = floatToolTip[j];
     if (++i >= heroText.length) i = 0;
+    if (++j >= floatToolTip.length) j = 0;
   }, 3000);
 }
 setHeroText();
 //  end of hero
-
-// Floating Icon
 function drag_start(event) {
   let x = float.offsetLeft - event.clientX;
   let y = float.offsetTop - event.clientY;
@@ -375,14 +435,3 @@ const fadeIn = new IntersectionObserver((entries, fadeIn) => {
 headers.forEach((heading) => {
   fadeIn.observe(heading);
 });
-// to be used codes
-/*
-  console.log(event.target);
-  let styles = window.getComputedStyle(event.target);
-  const a = styles.getPropertyValue("left");
-  const b = styles.getPropertyValue("top");
-  // const rect = card.getBoundingClientRect();
-    console.log("stop hitting me");
-
-
-*/

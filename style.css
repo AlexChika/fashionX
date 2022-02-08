@@ -29,6 +29,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 html {
   scroll-behavior: smooth;
@@ -424,7 +425,7 @@ nav {
 /* float btn */
 .float {
   position: fixed;
-  right: 7%;
+  right: 15%;
   top: 50%;
   height: 50px;
   width: 50px;
@@ -434,6 +435,26 @@ nav {
   cursor: pointer;
   justify-content: center;
   z-index: 20;
+}
+
+#float-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: var(--sec-bg);
+  color: grey;
+  width: max-content;
+  text-align: center;
+  max-width: 200%;
+  font-size: 12px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%) scale(0);
+  transition: transform 0.15s linear;
+  transform-origin: bottom;
+}
+#float-btn:focus::after,
+#float-btn:hover::after {
+  transform: translateX(-50%) translateY(-100%) scale(1);
 }
 #float-btn {
   justify-content: center;
@@ -474,7 +495,10 @@ nav {
   visibility: visible;
 }
 .float article .flt-bdy.show .options * {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+.float article .flt-bdy.show .options *:last-child {
+  margin-bottom: 0;
 }
 .float article .flt-bdy .fl-hdr {
   justify-content: space-between;
@@ -631,6 +655,10 @@ nav {
   }
   .itm-img {
     width: 200px;
+  }
+  /* float */
+  .float article .flt-bdy.show .options * {
+    margin-bottom: 5px;
   }
 }
 /* banner specific media query */
