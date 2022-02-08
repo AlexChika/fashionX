@@ -582,7 +582,11 @@ nav {
   width: 50%;
 }
 .crt-dtls {
+  font-weight: 300;
+  font-size: 16px;
+  padding-left: 10px;
   word-wrap: break-word;
+  align-self: center;
 }
 .crt-math {
   display: flex;
@@ -592,6 +596,9 @@ nav {
 }
 .crt-math * {
   cursor: pointer;
+}
+.crt-math > div i {
+  padding: 15px;
 }
 .crt-total-con {
   text-align: center;
