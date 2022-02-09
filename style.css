@@ -717,26 +717,9 @@ nav {
     text-shadow: 1px 1px 1px black;
     font-style: italic;
     background: rgba(253, 175, 120, 0.7);
-    animation: bannertext 3s linear infinite;
   }
   .ban-price {
     font-size: 25px;
-  }
-  @keyframes bannertext {
-    20% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    40% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    60% {
-      transform: translateX(100%);
-    }
-    61% {
-      transform: translateX(0);
-    }
   }
   .banner {
     padding: 0;

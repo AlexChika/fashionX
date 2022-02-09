@@ -273,6 +273,15 @@ class Storage {
   static updateCart(arr) {
     localStorage.setItem("cart", JSON.stringify(arr));
   }
+  static getBannerIndex() {
+    let i;
+    if (localStorage.getItem("index")) {
+      i = JSON.parse(localStorage.getItem("index"));
+    } else {
+      i = 0;
+    }
+    return i;
+  }
 }
 window.addEventListener("DOMContentLoaded", () => {
   const products = new Products();
@@ -281,6 +290,9 @@ window.addEventListener("DOMContentLoaded", () => {
   products
     .getProducts()
     .then((products) => {
+      setInterval(() => {
+        bannerRender(products);
+      }, 1000);
       sectionBody.forEach((section) => {
         updateDom.render(filter(products, section.dataset.id), section);
       });
@@ -293,9 +305,25 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("cart");
         updateDom.cartRender(Storage.getCart());
         updateDom.cartValues();
+        document.querySelectorAll(".tray").forEach((btn) => {
+          btn.dataset.stat = "out";
+          btn.classList.remove("added");
+          btn.querySelector(".stats").textContent = "Add To Cart";
+        });
       });
       updateDom.cartRender(cartItems);
       updateDom.cartValues();
+      const amtEl = document.querySelectorAll("#sub-total");
+      amtEl.forEach((el) => {
+        const item = el.parentElement.parentElement.parentElement.parentElement;
+        const id = item.dataset.id;
+        cartItems.forEach((item) => {
+          if (item.id === id) {
+            let currentAmt = parseInt(item.price) * parseInt(item.amt);
+            el.textContent = currentAmt;
+          }
+        });
+      });
       const bagBtns = document.querySelectorAll(".tray");
       bagBtns.forEach((btn) => {
         cartItems.forEach((item) => {
@@ -435,3 +463,101 @@ const fadeIn = new IntersectionObserver((entries, fadeIn) => {
 headers.forEach((heading) => {
   fadeIn.observe(heading);
 });
+
+// Random banner Generator
+// getting dates
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wenesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+function newDate() {
+  const calender = new Date();
+  let year = calender.getFullYear();
+  let month = months[calender.getMonth()];
+  let day = days[calender.getDay()];
+  let date = calender.getDate();
+  return {
+    year,
+    month,
+    day,
+    date,
+  };
+}
+newDate();
+setInterval(() => {
+  newDate();
+}, 1000);
+//  // //
+function bannerRender(array) {
+  let { year, month, day, date } = newDate();
+  let sub;
+  if (date === 1 || date === 21 || date === 31) {
+    sub = "ist";
+  } else if (date === 2 || date === 22) {
+    sub = "nd";
+  } else if (date === 3 || date === 23) {
+    sub = "rd";
+  } else {
+    sub = "th";
+  }
+  const curdate = `${day} ${date + sub} ${month} ${year}`;
+  let bannerIndex = Storage.getBannerIndex();
+  const { img, name, price } = array[bannerIndex] ? array[bannerIndex] : {};
+  let time = "5:03:00";
+  // let time = "17:59:00";
+  let nextDate = new Date(`${month}, ${date + 1} ${year} ${time}`);
+  let currentDate = new Date();
+  const futureDate = nextDate.getTime() - currentDate.getTime();
+  let oneDay = 24 * 60 * 60 * 1000;
+  let oneHour = 60 * 60 * 1000;
+  let oneMin = 60 * 1000;
+  let day1 = Math.floor(futureDate / oneDay);
+  let hour = Math.floor((futureDate % oneDay) / oneHour);
+  let min = Math.floor((futureDate % oneHour) / oneMin);
+  let sec = Math.floor((futureDate % oneMin) / 1000);
+  const html = `
+   <article class="">
+   <div class="img f-wh">
+     <img class="f-wh" src="${img}" alt="" />
+   </div>
+   <div class="banner-txt">
+     <h2>Deal Of The Day</h2>
+     <span>${curdate}</span> </br>
+     <span>${hour}hr(s) :  ${min}min : ${sec}sec Left</span>
+     <p>${name}</p>
+     <p>
+       <i class="bi bi-currency-dollar"></i>
+       <span id="ban-price">${price}</span>
+     </p>
+   </div>
+ </article>;
+  `;
+  const banners = document.querySelectorAll(".banner-rndm");
+  banners.forEach((banner) => {
+    banner.innerHTML = html;
+  });
+  if (hour === 0 && min === 0 && sec === 0) {
+    bannerIndex++;
+    if (bannerIndex >= array.length) bannerIndex = 0;
+    localStorage.setItem("index", JSON.stringify(bannerIndex));
+  }
+}
