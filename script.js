@@ -522,8 +522,7 @@ function bannerRender(array) {
   const curdate = `${day} ${date + sub} ${month} ${year}`;
   let bannerIndex = Storage.getBannerIndex();
   const { img, name, price } = array[bannerIndex] ? array[bannerIndex] : {};
-  let time = "5:03:00";
-  // let time = "17:59:00";
+  let time = "23:59:00";
   let nextDate = new Date(`${month}, ${date + 1} ${year} ${time}`);
   let currentDate = new Date();
   const futureDate = nextDate.getTime() - currentDate.getTime();
