@@ -376,13 +376,13 @@ nav {
 .hdng.phn {
   background-image: url(./images/phone-banner.jpg);
 }
-/* Watch section */
-.hdng.watch {
-  background-image: url(./images/phone-banner.jpg);
-}
 /* laptop section */
 .hdng.lap {
   background-image: url(./images/laptop-banner.jpg);
+}
+/* Watch section */
+.hdng.watch {
+  background-image: url(./images/watch-banner.jpg);
 }
 /* male section */
 .hdng.male {
@@ -391,8 +391,7 @@ nav {
 }
 /* suit section */
 .hdng.suit {
-  background-image: url(./images/male-banner.jpg);
-  background-position: top;
+  background-image: url(./images/suits-banner.jpg);
 }
 /* ladies section */
 .hdng.lds {
@@ -401,12 +400,10 @@ nav {
 /* shoe section */
 .hdng.shoe {
   background-image: url(./images/shoe-banner.jpg);
-  background-position: top;
 }
 /* heel section */
 .hdng.heel {
-  background-image: url(./images/shoe-banner.jpg);
-  background-position: top;
+  background-image: url(./images/heel-banner.jpg);
 }
 /* sneakers section  */
 .hdng.snks {
@@ -414,7 +411,7 @@ nav {
 }
 .hdng {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(70px);
   transition: opacity 300ms ease-in, transform 350ms ease-in;
 }
 .hdng.fadein {

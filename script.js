@@ -134,7 +134,7 @@ class UpdateDom {
               <p class="crt-item-desc">${desc}</p>
               <p>
                 Sub-Total:<i class="bi bi-currency-dollar"></i
-                ><span id="sub-total">${price}</span>
+                ><span id="sub-total">${price * amt}</span>
               </p>
             </div>
           </div>
@@ -223,8 +223,6 @@ class UpdateDom {
     let itmCount = 0;
     cart.forEach((item) => {
       totalSum += parseInt(item.price) * item.amt;
-    });
-    cart.forEach((item) => {
       itmCount += parseInt(item.amt);
     });
     crtState.textContent = `${itmCount} Items In Cart`;
@@ -313,17 +311,6 @@ window.addEventListener("DOMContentLoaded", () => {
       });
       updateDom.cartRender(cartItems);
       updateDom.cartValues();
-      const amtEl = document.querySelectorAll("#sub-total");
-      amtEl.forEach((el) => {
-        const item = el.parentElement.parentElement.parentElement.parentElement;
-        const id = item.dataset.id;
-        cartItems.forEach((item) => {
-          if (item.id === id) {
-            let currentAmt = parseInt(item.price) * parseInt(item.amt);
-            el.textContent = currentAmt;
-          }
-        });
-      });
       const bagBtns = document.querySelectorAll(".tray");
       bagBtns.forEach((btn) => {
         cartItems.forEach((item) => {
@@ -536,7 +523,7 @@ function bannerRender(array) {
   const html = `
    <article class="">
    <div class="img f-wh">
-     <img class="f-wh" src="${img}" alt="" />
+     <img class="f-wh" src="${img}" alt="${name}" />
    </div>
    <div class="banner-txt">
      <h2>Deal Of The Day</h2>
@@ -548,15 +535,18 @@ function bannerRender(array) {
        <span id="ban-price">${price}</span>
      </p>
    </div>
- </article>;
+ </article>
   `;
   const banners = document.querySelectorAll(".banner-rndm");
   banners.forEach((banner) => {
     banner.innerHTML = html;
   });
   if (hour === 0 && min === 0 && sec === 0) {
-    bannerIndex++;
-    if (bannerIndex >= array.length) bannerIndex = 0;
+    function random() {
+      let x = Math.floor(Math.random() * array.length);
+      return x;
+    }
+    bannerIndex = random();
     localStorage.setItem("index", JSON.stringify(bannerIndex));
   }
 }
