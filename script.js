@@ -227,7 +227,7 @@ class UpdateDom {
     });
     crtState.textContent = `${itmCount} Items In Cart`;
     crtNum.textContent = itmCount;
-    total.textContent = totalSum;
+    total.textContent = totalSum.toLocaleString();
   }
   remove(id) {
     const items = Storage.getCart().filter((item) => {

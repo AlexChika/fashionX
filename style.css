@@ -289,7 +289,7 @@ nav {
 .sec-bdy {
   padding: 0 5px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
   place-items: center;
   background: var(--main-bg);
   display: none;
@@ -338,7 +338,8 @@ nav {
 /* tray */
 .sec-bdy .itm .tray {
   position: absolute;
-  align-self: end;
+  margin-left: 0%;
+  right: -10px;
   top: 50%;
   background: var(--chocolate);
   border-top-left-radius: 15px;
@@ -352,6 +353,7 @@ nav {
 .sec-bdy .itm:hover .tray,
 .sec-bdy .itm:focus .tray {
   transform: translateX(0);
+  right: 0%;
 }
 .sec-bdy .itm .tray.added {
   background: rgb(188, 238, 113);
